@@ -1,5 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  MenuIcon,
+} from "@heroicons/react/solid";
 
 export default function Home() {
   return (
@@ -9,14 +14,16 @@ export default function Home() {
         <link rel="icon" href="/images/logos.png" />
       </Head>
 
-      <div className="text-gray-200 ">
-        <Image
-          src="/images/lightlogo.png"
-          className="bg-blue-900 "
-          height={50}
-          width={300}
-        />
-        <h2>this is the start of the const</h2>
+      <div className="h-screen sm:h-[70vh] w-full text-white  bg-gradient-to-r from-[#03056b] via-[#7703ef] to-[#35d4fb]">
+        <div className="flex p-5 items-center w-full">
+          <MenuIcon className="h-10 mr-5" />
+          <Image
+            src="/images/lightlogo.png"
+            className=""
+            height={40}
+            width={200}
+          />
+        </div>
       </div>
     </div>
   );
