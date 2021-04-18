@@ -5,7 +5,7 @@ import { MenuIcon } from "@heroicons/react/solid";
 import { useState } from "react";
 
 export default function Home() {
-  const [showNav, setShowNav] = useState(true);
+  const [showNav, setShowNav] = useState(false);
   const links = [
     "courses",
     "Road-Map",
@@ -23,7 +23,10 @@ export default function Home() {
 
       <div className="h-screen sm:h-[70vh] w-full text-white relative bg-gradient-to-r from-[#03056b] via-[#7703ef] to-[#35d4fb]">
         <div className="flex px-5 py-2 items-center overflow-hidden w-full border-b-2 border-[#35d4fb]">
-          <MenuIcon className="h-8 mr-1 sm:hidden" />
+          <MenuIcon
+            className="h-8 mr-1 sm:hidden"
+            onClick={() => setShowNav(!showNav)}
+          />
           <Image
             src="/images/lightlogo.png"
             className="mr-2"
@@ -40,7 +43,10 @@ export default function Home() {
             sm:static`}
           >
             {links.map((link) => (
-              <h3 className="p-2 border-b-2 border-transparent hover:border-[#03056b] cursor-pointer">
+              <h3
+                className="p-2 border-b-2 border-transparent hover:border-[#03056b] cursor-pointer"
+                onClick={() => setShowNav(false)}
+              >
                 {link}
               </h3>
             ))}
