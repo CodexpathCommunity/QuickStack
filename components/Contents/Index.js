@@ -104,7 +104,7 @@ function Contents() {
     <div className="flex flex-col w-full max-w-screen-xl m-auto ">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between p-2">
         <div className="flex items-center space-x-2 ">
-          {lineState.map(({ state, name, value }) => (
+          {linkData.map(({ state, name, value }) => (
             <Link
               active={state}
               name={name}
@@ -113,7 +113,7 @@ function Contents() {
             />
           ))}
         </div>
-        {linkState.search && (
+        {lineState.search && (
           <form
             className="
         flex flex-grow border px-6 py-2 
