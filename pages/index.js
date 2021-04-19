@@ -27,6 +27,7 @@ export default function Home() {
       <SideNav showNav={showNav} setShowNav={setShowNav} links={links} />
       <Hero />
       <Contents />
+      <Hero />
     </div>
   );
 }

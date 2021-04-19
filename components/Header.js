@@ -14,7 +14,7 @@ function Header({ showNav, setShowNav, links }) {
         "
     >
       <MenuIcon
-        className="h-8 mr-1 sm:hidden"
+        className="h-8 mr-1 sm:hidden cursor-pointer"
         onClick={() => setShowNav(!showNav)}
       />
       <Image

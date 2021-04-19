@@ -1,21 +1,104 @@
+import { useState } from "react";
 import Link from "./Link";
 
 function Contents() {
+  const [lineState, setLineState] = useState({
+    search: false,
+    popular: true,
+    recent: false,
+    ordered: false,
+    upvoted: false,
+  });
+
+  const handleClick = (e) => {
+    const name = e.target.getAttribute("value");
+
+    if (name === "search") {
+      setLineState({
+        search: true,
+        popular: false,
+        recent: false,
+        ordered: false,
+        upvoted: false,
+      });
+    }
+    if (name === "popular") {
+      setLineState({
+        search: false,
+        popular: true,
+        recent: false,
+        ordered: false,
+        upvoted: false,
+      });
+    }
+    if (name === "recent") {
+      setLineState({
+        search: false,
+        popular: false,
+        recent: true,
+        ordered: false,
+        upvoted: false,
+      });
+    }
+    if (name === "order") {
+      setLineState({
+        search: false,
+        popular: false,
+        recent: false,
+        ordered: true,
+        upvoted: false,
+      });
+    }
+    if (name === "upvoted") {
+      setLineState({
+        search: false,
+        popular: false,
+        recent: false,
+        ordered: false,
+        upvoted: true,
+      });
+    }
+  };
+
+  const linkData = [
+    {
+      name: "Search",
+      state: lineState.search,
+      value: "search",
+    },
+    {
+      name: "Popular",
+      state: lineState.popular,
+      value: "popular",
+    },
+    {
+      name: "Recent",
+      state: lineState.recent,
+      value: "recent",
+    },
+    {
+      name: "Laddar",
+      state: lineState.ordered,
+      value: "order",
+    },
+    {
+      name: "Upvoted",
+      state: lineState.upvoted,
+      value: "upvoted",
+    },
+  ];
+
   return (
-    <div className="flex flex-col w-full p-5">
-      <div className="flex items-center space-x-4 ">
-        <h3
-          className="
-        text-xl text:blue-200 p-2 font-semibold 
-        p-2 border-b-4 border-border-[#03056b]  
-        hover:border-[#03056b] cursor-pointer
-        "
-        >
-          Recent
-        </h3>
-        <Link />
-        <h3 className="text-lg text:blue-200 p-2 ">Recent</h3>
-        <h3 className="text-lg text:blue-200 p-2 ">Recent</h3>
+    <div className="flex flex-col w-full max-w-screen-xl m-auto ">
+      <div className="flex items-center space-x-2 ">
+        {linkData.map(({ state, name, value }) => (
+          <Link
+            active={state}
+            name={name}
+            value={value}
+            onClick={handleClick}
+          />
+        ))}
       </div>
     </div>
   );
