@@ -1,10 +1,10 @@
 import Head from "next/head";
-import Image from "next/image";
 import { useState } from "react";
 import Header from "../components/Header";
 import SideNav from "../components/SideNav";
 import Hero from "../components/Hero";
 import NavLink from "../components/NavLink/Index";
+import Card from "../components/Card";
 
 export default function Home() {
   const [showNav, setShowNav] = useState(false);
@@ -27,8 +27,15 @@ export default function Home() {
       <SideNav showNav={showNav} setShowNav={setShowNav} links={links} />
       <Hero />
       <NavLink />
-      <Hero />
-      <Hero />
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 max-w-screen-xl w-full p-4 m-auto">
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+      </div>
     </div>
   );
 }
