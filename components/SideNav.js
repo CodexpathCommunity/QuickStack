@@ -5,6 +5,7 @@ function SideNav({ links, showNav, setShowNav }) {
         showNav ? "left-0" : "left-[-100%] "
       } text-w bg-[#35d4fb] flex flex-col items-center 
             justify-evenly text-2xl font-semibold z-40
+            text-white
             `}
     >
       {links.map((link) => (

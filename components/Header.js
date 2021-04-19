@@ -6,9 +6,9 @@ function Header({ showNav, setShowNav, links }) {
   return (
     <div
       className="
-        flex px-5 py-2 z-50 
+        flex px-5 py-2 z-50 text-white
         items-center sticky 
-        top-0 overflow-hidden w-full 
+        top-0 w-full 
         border-b-2 border-[#35d4fb]
         bg-gradient-to-r from-[#03056b] via-[#7703ef] to-[#35d4fb]
         "

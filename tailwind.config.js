@@ -3,12 +3,11 @@ module.exports = {
   purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    backgroundColor: (theme) => ({
-      primary: "#03056b",
-      secondary: "#7703ef",
-      light: "#35d4fb",
-      danger: "#ff3366",
-    }),
+    extend: {
+      backgroundImage: (theme) => ({
+        "hero": "url('/imgage/learncode.svg')",
+      }),
+    },
   },
 
   variants: {
