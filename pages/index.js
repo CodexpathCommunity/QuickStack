@@ -17,7 +17,7 @@ export default function Home() {
     "Pricing",
   ];
   return (
-    <div className="">
+    <div className="relative">
       <Head>
         <title>QuiskStack</title>
         <link rel="icon" href="/images/logos.png" />
@@ -27,6 +27,7 @@ export default function Home() {
       <SideNav showNav={showNav} setShowNav={setShowNav} links={links} />
       <Hero />
       <Contents />
+      <Hero />
       <Hero />
     </div>
   );
