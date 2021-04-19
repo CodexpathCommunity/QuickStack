@@ -2,7 +2,7 @@ import { useState } from "react";
 import Link from "./Link";
 import SearchBar from "./SearchBar";
 
-function Contents() {
+function NavLink() {
   const [lineState, setLineState] = useState({
     search: false,
     popular: true,
@@ -111,4 +111,4 @@ function Contents() {
   );
 }
 
-export default Contents;
+export default NavLink;

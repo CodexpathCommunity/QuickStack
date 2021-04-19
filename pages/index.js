@@ -4,7 +4,7 @@ import { useState } from "react";
 import Header from "../components/Header";
 import SideNav from "../components/SideNav";
 import Hero from "../components/Hero";
-import Contents from "../components/Contents/Index";
+import NavLink from "../components/NavLink/Index";
 
 export default function Home() {
   const [showNav, setShowNav] = useState(false);
@@ -26,7 +26,7 @@ export default function Home() {
       <Header showNav={showNav} setShowNav={setShowNav} links={links} />
       <SideNav showNav={showNav} setShowNav={setShowNav} links={links} />
       <Hero />
-      <Contents />
+      <NavLink />
       <Hero />
       <Hero />
     </div>
