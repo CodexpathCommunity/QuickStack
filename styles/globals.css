@@ -4,8 +4,8 @@
 
 @layer components {
   .btn {
-    @apply bg-[#35d4fb] m-1 p-3 rounded-md hover:ring-1 
+    @apply bg-gradient-to-r from-[#03056b] via-[#7703ef] to-[#35d4fb] m-1 p-3 rounded-md hover:ring-1 
     focus:outline-none ring-[#03056b] text-sm 
-    text-gray-500 hover:shadow-md active:ring-[#03056b];
+    text-white hover:shadow-md active:ring-[#03056b];
   }
 }
