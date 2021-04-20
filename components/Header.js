@@ -1,8 +1,16 @@
 import Avatar from "./Avatar";
 import Image from "next/image";
 import { MenuIcon } from "@heroicons/react/solid";
+import Modal from "@material-ui/core/Modal";
+import { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, provider } from "../firebase";
 
 function Header({ showNav, setShowNav, links }) {
+  const [open, setOpen] = useState(false);
+  const [openProfle, setOpenProfle] = useState(false);
+  const [user] = useAuthState(auth);
+
   return (
     <div
       className="
@@ -47,7 +55,7 @@ function Header({ showNav, setShowNav, links }) {
           setShowNav={setShowNav}
         />
       ) : (
-        <button>Sign IN</button>
+        <button className="btn">SignIn</button>
       )}
     </div>
   );
