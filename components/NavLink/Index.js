@@ -80,7 +80,7 @@ function NavLink() {
     {
       name: "Laddar",
       state: lineState.ordered,
-      value: "order",
+      value: "Categories",
     },
     {
       name: "Upvoted",

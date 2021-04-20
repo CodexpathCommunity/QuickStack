@@ -40,11 +40,15 @@ function Header({ showNav, setShowNav, links }) {
           </h3>
         ))}
       </div>
-      <Avatar
-        url="https://avatars.githubusercontent.com/u/69096827?v=4"
-        className="ml-auto"
-        setShowNav={setShowNav}
-      />
+      {user ? (
+        <Avatar
+          url="https://avatars.githubusercontent.com/u/69096827?v=4"
+          className="ml-auto"
+          setShowNav={setShowNav}
+        />
+      ) : (
+        <button>Sign IN</button>
+      )}
     </div>
   );
 }
