@@ -92,13 +92,14 @@ function NavLink() {
   return (
     <div
       className="
-       flex flex-col items-start px-5 py-2 z-50 bg-white
+       flex flex-col items-start px-5 py-2 z-40 bg-white
         sm:items-center sticky sm:flex-row
         top-14 w-full "
     >
       <div className="flex items-center space-x-2 ">
         {linkData.map(({ state, name, value }) => (
           <Link
+            key={name}
             active={state}
             name={name}
             value={value}

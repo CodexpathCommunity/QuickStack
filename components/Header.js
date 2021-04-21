@@ -2,16 +2,18 @@ import Avatar from "./Avatar";
 import Image from "next/image";
 import { MenuIcon } from "@heroicons/react/solid";
 import Modal from "@material-ui/core/Modal";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
 import LoginModal from "./Modals/LoginModal";
 import ProfileModal from "./Modals/ProfileModal";
+import { Context } from "../context";
 
 function Header({ links }) {
   const [open, setOpen] = useState(false);
   const [openProfle, setOpenProfle] = useState(false);
   const [user] = useAuthState(auth);
+  const { state, dispatch } = useContext(Context);
 
   return (
     <div
@@ -23,12 +25,26 @@ function Header({ links }) {
         bg-gradient-to-r from-[#03056b] via-[#7703ef] to-[#35d4fb]
         "
     >
-      <MenuIcon className="h-8 mr-1 sm:hidden cursor-pointer" onClick={""} />
+      <MenuIcon
+        className="h-8 mr-1 sm:hidden cursor-pointer"
+        onClick={() =>
+          dispatch({
+            type: "SET_NAV",
+            payload: !state.openNav,
+          })
+        }
+      />
       <Image
         src="/images/lightlogo.png"
         className="mr-2"
         height={30}
         width={200}
+        onClick={() =>
+          dispatch({
+            type: "SET_NAV",
+            payload: false,
+          })
+        }
       />
       <div
         className={`h-[90%] w-full absolute top-[3.75rem] ${"left-[-100%] "} text-w bg-[#35d4fb] flex flex-col items-center 
@@ -52,6 +68,7 @@ function Header({ links }) {
           url="https://avatars.githubusercontent.com/u/69096827?v=4"
           className="ml-auto"
           setOpenProfle={setOpenProfle}
+          heading
         />
       ) : (
         <button className="btn ml-auto" onClick={() => setOpen(true)}>

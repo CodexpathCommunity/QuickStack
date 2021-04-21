@@ -1,17 +1,19 @@
-function Avatar({ url, className, setOpenProfle, modal, heading }) {
-  // const [{}, dispatch] = useStateValue();
+import { useContext } from "react";
+import { Context } from "../context";
 
-  // const handleClick = () => {
-  //   dispatch({
-  //     type: "TOGGLE_NAV",
-  //     navState: false,
-  //   });
-  //   setOpenProfle(true);
-  // };
+function Avatar({ url, className, setOpenProfle, modal, heading }) {
+  const { state, dispatch } = useContext(Context);
 
   return (
     <img
-      onClick={""}
+      onClick={() => {
+        heading &&
+          dispatch({
+            type: "SET_NAV",
+            payload: false,
+          });
+        setOpenProfle(true);
+      }}
       src={url}
       loading="lazy"
       className={`${
