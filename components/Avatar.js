@@ -1,19 +1,17 @@
-import { useStateValue } from "../StateProvider";
-
 function Avatar({ url, className, setOpenProfle, modal, heading }) {
-  const [{}, dispatch] = useStateValue();
+  // const [{}, dispatch] = useStateValue();
 
-  const handleClick = () => {
-    dispatch({
-      type: "TOGGLE_NAV",
-      navState: false,
-    });
-    setOpenProfle(true);
-  };
+  // const handleClick = () => {
+  //   dispatch({
+  //     type: "TOGGLE_NAV",
+  //     navState: false,
+  //   });
+  //   setOpenProfle(true);
+  // };
 
   return (
     <img
-      onClick={heading && handleClick}
+      onClick={""}
       src={url}
       loading="lazy"
       className={`${

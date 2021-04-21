@@ -7,20 +7,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
 import LoginModal from "./Modals/LoginModal";
 import ProfileModal from "./Modals/ProfileModal";
-import { useStateValue } from "../StateProvider";
 
 function Header({ links }) {
   const [open, setOpen] = useState(false);
   const [openProfle, setOpenProfle] = useState(false);
   const [user] = useAuthState(auth);
-  const [{ openNav }, dispatch] = useStateValue();
-
-  const ToggleNav = () => {
-    dispatch({
-      type: "TOGGle_NAV",
-      navState: !openNav,
-    });
-  };
 
   return (
     <div
@@ -32,19 +23,12 @@ function Header({ links }) {
         bg-gradient-to-r from-[#03056b] via-[#7703ef] to-[#35d4fb]
         "
     >
-      <MenuIcon
-        className="h-8 mr-1 sm:hidden cursor-pointer"
-        onClick={ToggleNav}
-      />
+      <MenuIcon className="h-8 mr-1 sm:hidden cursor-pointer" onClick={""} />
       <Image
         src="/images/lightlogo.png"
         className="mr-2"
         height={30}
         width={200}
-        onClick={dispatch({
-          type: "TOGGLE_NAV",
-          navState: false,
-        })}
       />
       <div
         className={`h-[90%] w-full absolute top-[3.75rem] ${"left-[-100%] "} text-w bg-[#35d4fb] flex flex-col items-center 
@@ -57,7 +41,7 @@ function Header({ links }) {
           <h3
             key={link}
             className="p-2 border-b-2 border-transparent hover:border-[#03056b] cursor-pointer"
-            onClick={() => setShowNav(false)}
+            onClick={""}
           >
             {link}
           </h3>

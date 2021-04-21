@@ -3,8 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect } from "react";
 import firebase from "firebase";
 import { auth, db } from "../firebase";
-import { StateProvider } from "../StateProvider";
-import reducer, { initialState } from "../reducer";
+import { Provider } from "../context";
 
 function MyApp({ Component, pageProps }) {
   const [user] = useAuthState(auth);
@@ -23,9 +22,9 @@ function MyApp({ Component, pageProps }) {
   }, [user]);
 
   return (
-    <StateProvider initialState={initialState} reducer={reducer}>
+    <Provider>
       <Component {...pageProps} />
-    </StateProvider>
+    </Provider>
   );
 }
 
