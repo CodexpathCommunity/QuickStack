@@ -6,7 +6,7 @@ function Avatar({ url, className, setShowNav, setOpenProfle, modal }) {
 
   return (
     <img
-      onClick={handleClick}
+      onClick={setShowNav && handleClick}
       src={url}
       loading="lazy"
       className={`${

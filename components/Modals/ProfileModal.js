@@ -11,7 +11,7 @@ function rand() {
 }
 
 function getModalStyle() {
-  const top = 40;
+  const top = 50;
   const left = 50;
 
   return {
@@ -24,7 +24,7 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
-    width: 400,
+    maxWidth: 400,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
@@ -48,15 +48,14 @@ function ProfileModal({ setOpen }) {
   };
   return (
     <div style={modalStyle} className={classes.paper}>
-      <h2 className="text-lg">{user?.displayName} </h2>
+      <h2 className="text-xl mb-5">{user?.displayName} </h2>
       <div>
         <Avatar url={user?.photoURL} modal />
       </div>
       <div>
-        <button className="btn" onClick={signOut}>
+        <button className="btn mt-5" onClick={signOut}>
           Logout
         </button>
-        <button className="btn">Dashboard</button>
       </div>
     </div>
   );

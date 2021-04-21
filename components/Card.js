@@ -7,9 +7,9 @@ function Card() {
     <div
       className="
       cursor-pointer
-    flex flex-col border-2 border-transparent hover:border-[#03056b] p-4 
+    flex flex-col border-2 border-transparent hover:border-[#7703ef] p-4 
     items-start text-white w-full 
-    max-w-xs bg-[#7703ef] m-auto 
+    max-w-xs bg-[#03056b] m-auto 
     rounded-md shadow-md hover:shadow-lg
     "
     >
