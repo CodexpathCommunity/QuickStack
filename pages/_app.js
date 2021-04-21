@@ -3,10 +3,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect } from "react";
 import firebase from "firebase";
 import { auth, db } from "../firebase";
-import Loading from "../components/Loading";
+import { StateProvider } from "../StateProvider";
+import reducer, { initialState } from "../reducer";
 
 function MyApp({ Component, pageProps }) {
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   useEffect(() => {
     if (user) {
@@ -21,8 +22,11 @@ function MyApp({ Component, pageProps }) {
     }
   }, [user]);
 
-  if (loading) return <Loading />;
-  return <Component {...pageProps} />;
+  return (
+    <StateProvider initialState={initialState} reducer={reducer}>
+      <Component {...pageProps} />
+    </StateProvider>
+  );
 }
 
 export default MyApp;

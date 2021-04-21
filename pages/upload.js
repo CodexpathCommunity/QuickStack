@@ -18,8 +18,8 @@ function upload() {
         <title>Upload - QuiskStack</title>
         <link rel="icon" href="/images/logos.png" />
       </Head>
-      <Header showNav={showNav} setShowNav={setShowNav} links={links} />
-      <SideNav showNav={showNav} setShowNav={setShowNav} links={links} />
+      {/* <Header showNav={showNav} setShowNav={setShowNav} links={links} />
+      <SideNav showNav={showNav} setShowNav={setShowNav} links={links} /> */}
 
       <div className="flex items-center justify-center h-screen">
         <div className="flex flex-col border-2 max-w-2xl w-[90%] h-3/4 border-[#03056b] rounded-md p-2 sm:p-5">

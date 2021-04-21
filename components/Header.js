@@ -4,14 +4,23 @@ import { MenuIcon } from "@heroicons/react/solid";
 import Modal from "@material-ui/core/Modal";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, provider } from "../firebase";
+import { auth } from "../firebase";
 import LoginModal from "./Modals/LoginModal";
 import ProfileModal from "./Modals/ProfileModal";
+import { useStateValue } from "../StateProvider";
 
-function Header({ showNav, setShowNav, links }) {
+function Header({ links }) {
   const [open, setOpen] = useState(false);
   const [openProfle, setOpenProfle] = useState(false);
   const [user] = useAuthState(auth);
+  const [{ openNav }, dispatch] = useStateValue();
+
+  const ToggleNav = () => {
+    dispatch({
+      type: "TOGGle_NAV",
+      navState: !openNav,
+    });
+  };
 
   return (
     <div
@@ -25,14 +34,17 @@ function Header({ showNav, setShowNav, links }) {
     >
       <MenuIcon
         className="h-8 mr-1 sm:hidden cursor-pointer"
-        onClick={() => setShowNav(!showNav)}
+        onClick={ToggleNav}
       />
       <Image
         src="/images/lightlogo.png"
         className="mr-2"
         height={30}
         width={200}
-        onClick={() => setShowNav(false)}
+        onClick={dispatch({
+          type: "TOGGLE_NAV",
+          navState: false,
+        })}
       />
       <div
         className={`h-[90%] w-full absolute top-[3.75rem] ${"left-[-100%] "} text-w bg-[#35d4fb] flex flex-col items-center 
@@ -43,6 +55,7 @@ function Header({ showNav, setShowNav, links }) {
       >
         {links.map((link) => (
           <h3
+            key={link}
             className="p-2 border-b-2 border-transparent hover:border-[#03056b] cursor-pointer"
             onClick={() => setShowNav(false)}
           >
@@ -54,7 +67,6 @@ function Header({ showNav, setShowNav, links }) {
         <Avatar
           url="https://avatars.githubusercontent.com/u/69096827?v=4"
           className="ml-auto"
-          setShowNav={setShowNav}
           setOpenProfle={setOpenProfle}
         />
       ) : (
