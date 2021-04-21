@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { HeadeBtn, LoginHeader } from "./HeaderElement";
 import { auth, provider } from "../../firebase";
 
 function rand() {
@@ -42,8 +41,10 @@ function LoginModal({ setOpen }) {
 
   return (
     <div style={modalStyle} className={classes.paper}>
-      <LoginHeader>Login to continue</LoginHeader>
-      <HeadeBtn onClick={signIn}>Continue With Google </HeadeBtn>
+      <h2>Login to continue</h2>
+      <button className="btn" onClick={signIn}>
+        Continue With Google{" "}
+      </button>
     </div>
   );
 }
