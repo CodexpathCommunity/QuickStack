@@ -55,8 +55,10 @@ function Header({ showNav, setShowNav, links }) {
           setShowNav={setShowNav}
         />
       ) : (
-        <button className="btn">SignIn</button>
+        <button className="btn ml-auto">Login</button>
       )}
+
+      
     </div>
   );
 }
