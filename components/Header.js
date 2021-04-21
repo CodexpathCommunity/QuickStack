@@ -5,6 +5,8 @@ import Modal from "@material-ui/core/Modal";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, provider } from "../firebase";
+import LoginModal from "./Modals/LoginModal";
+import ProfileModal from "./Modals/ProfileModal";
 
 function Header({ showNav, setShowNav, links }) {
   const [open, setOpen] = useState(false);
@@ -53,12 +55,30 @@ function Header({ showNav, setShowNav, links }) {
           url="https://avatars.githubusercontent.com/u/69096827?v=4"
           className="ml-auto"
           setShowNav={setShowNav}
+          setOpenProfle={setOpenProfle}
         />
       ) : (
-        <button className="btn ml-auto">Login</button>
+        <button className="btn ml-auto" onClick={() => setOpen(true)}>
+          Login
+        </button>
       )}
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <LoginModal setOpen={setOpen} />
+      </Modal>
 
-      
+      <Modal
+        open={openProfle}
+        onClose={() => setOpenProfle(false)}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <ProfileModal setOpen={setOpenProfle} />
+      </Modal>
     </div>
   );
 }

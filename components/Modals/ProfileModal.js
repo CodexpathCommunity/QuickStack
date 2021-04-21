@@ -50,7 +50,7 @@ function ProfileModal({ setOpen }) {
     <div style={modalStyle} className={classes.paper}>
       <h2 className="text-lg">{user?.displayName} </h2>
       <div>
-        <Avatar className="" src={user?.photoURL} />
+        <Avatar url={user?.photoURL} modal />
       </div>
       <div>
         <button className="btn" onClick={signOut}>

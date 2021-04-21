@@ -41,7 +41,7 @@ function LoginModal({ setOpen }) {
 
   return (
     <div style={modalStyle} className={classes.paper}>
-      <h2>Login to continue</h2>
+      <h2 className="mb-4 text-xl font-md">Login to continue</h2>
       <button className="btn" onClick={signIn}>
         Continue With Google{" "}
       </button>
