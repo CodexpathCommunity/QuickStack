@@ -1,5 +1,6 @@
 import Avatar from "./Avatar";
 import Image from "next/image";
+import { CloudUploadIcon } from "@heroicons/react/outline";
 import { MenuIcon } from "@heroicons/react/solid";
 import Modal from "@material-ui/core/Modal";
 import { useContext, useState } from "react";
@@ -8,8 +9,9 @@ import { auth } from "../firebase";
 import LoginModal from "./Modals/LoginModal";
 import ProfileModal from "./Modals/ProfileModal";
 import { Context } from "../context";
+import Link from "next/link";
 
-function Header({ links }) {
+function Header() {
   // open is for the login modal while open profile iis for the profile modal
 
   const [open, setOpen] = useState(false);
@@ -17,6 +19,15 @@ function Header({ links }) {
   // firebase  user for authenticated state
   const [user] = useAuthState(auth);
   const { state, dispatch } = useContext(Context);
+
+  const links = [
+    "courses",
+    "Road-Map",
+    "Resourses",
+    "Design Trends",
+    "Jobs",
+    "Pricing",
+  ];
 
   return (
     <div
@@ -38,48 +49,59 @@ function Header({ links }) {
           })
         }
       />
-      <Image
-        src="/images/lightlogo.png"
-        className="mr-2"
-        height={30}
-        width={200}
-        onClick={() =>
-          dispatch({
-            type: "SET_NAV",
-            payload: false,
-          })
-        }
-      />
+      <Link href="/">
+        <Image
+          src="/images/lightlogo.png"
+          className="mr-2"
+          height={30}
+          width={200}
+          onClick={() =>
+            dispatch({
+              type: "SET_NAV",
+              payload: false,
+            })
+          }
+        />
+      </Link>
       <div
-        className={`h-[90%] w-full absolute top-[3.75rem] ${"left-[-100%] "} text-w bg-[#35d4fb] flex flex-col items-center 
+        className={`h-[90%] w-full hidden  text-w 
+        sm:flex flex-col items-center 
             justify-evenly text-2xl font-semibold 
             sm:flex-row sm:text-base sm:bg-[transparent]
             sm:flex-grow
-            sm:static`}
+            `}
       >
         {links.map((link) => (
           <h3
             key={link}
             className="p-2 border-b-2 border-transparent hover:border-[#03056b] cursor-pointer"
-            onClick={""}
           >
             {link}
           </h3>
         ))}
       </div>
+
       {user ? (
-        <Avatar
-          url="https://avatars.githubusercontent.com/u/69096827?v=4"
-          className="ml-auto"
-          setOpenProfle={setOpenProfle}
-          onClick={() => {
-            dispatch({
-              type: "SET_NAV",
-              payload: false,
-            });
-            setOpenProfle(true);
-          }}
-        />
+        <>
+          <Link href="/upload" className="link">
+            <CloudUploadIcon
+              className="h-10 mr-4 ml-4 hidden sm:inline-block"
+              className="link"
+            />
+          </Link>
+          <Avatar
+            url="https://avatars.githubusercontent.com/u/69096827?v=4"
+            className="ml-auto"
+            setOpenProfle={setOpenProfle}
+            onClick={() => {
+              dispatch({
+                type: "SET_NAV",
+                payload: false,
+              });
+              setOpenProfle(true);
+            }}
+          />
+        </>
       ) : (
         <button
           className="btn ml-auto"

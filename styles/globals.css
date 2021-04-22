@@ -8,4 +8,7 @@
     focus:outline-none ring-[#7703ef] text-sm  hover:bg-gradient-to-l from-[#35d4fb] via-[#7703ef] to-[#03056b]
     text-white hover:shadow-md active:ring-[#03056b] transition duration-150 transform hover:scale-105;
   }
+  .link {
+    @apply cursor-pointer outline-none;
+  }
 }

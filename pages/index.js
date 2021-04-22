@@ -6,14 +6,6 @@ import NavLink from "../components/NavLink/Index";
 import Card from "../components/Card";
 
 export default function Home() {
-  const links = [
-    "courses",
-    "Road-Map",
-    "Resourses",
-    "Design Trends",
-    "Jobs",
-    "Pricing",
-  ];
   return (
     <div className="relative">
       <Head>
@@ -21,8 +13,8 @@ export default function Home() {
         <link rel="icon" href="/images/logos.png" />
       </Head>
 
-      <Header links={links} />
-      <SideNav links={links} />
+      <Header />
+      <SideNav />
       <Hero />
       <NavLink />
       <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-5 max-w-screen-xl w-full p-4 m-auto mt-10">

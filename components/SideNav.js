@@ -1,8 +1,17 @@
 import { useContext } from "react";
 import { Context } from "../context";
 
-function SideNav({ links }) {
+function SideNav() {
   const { state, dispatch } = useContext(Context);
+  const links = [
+    "courses",
+    "Road-Map",
+    "Resourses",
+    "Design Trends",
+    "Jobs",
+    "Pricing",
+  ];
+
   return (
     <div
       className={`h-[90%] w-full fixed top-[3.75rem] ${
