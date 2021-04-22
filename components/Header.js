@@ -10,8 +10,11 @@ import ProfileModal from "./Modals/ProfileModal";
 import { Context } from "../context";
 
 function Header({ links }) {
+  // open is for the login modal while open profile iis for the profile modal
+
   const [open, setOpen] = useState(false);
   const [openProfle, setOpenProfle] = useState(false);
+  // firebase  user for authenticated state
   const [user] = useAuthState(auth);
   const { state, dispatch } = useContext(Context);
 
@@ -25,6 +28,7 @@ function Header({ links }) {
         bg-gradient-to-r from-[#03056b] via-[#7703ef] to-[#35d4fb]
         "
     >
+      {/* this is the toggle icon that dispatches the toggle navstate */}
       <MenuIcon
         className="h-8 mr-1 sm:hidden cursor-pointer"
         onClick={() =>
