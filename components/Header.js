@@ -68,10 +68,25 @@ function Header({ links }) {
           url="https://avatars.githubusercontent.com/u/69096827?v=4"
           className="ml-auto"
           setOpenProfle={setOpenProfle}
-          heading
+          onClick={() => {
+            dispatch({
+              type: "SET_NAV",
+              payload: false,
+            });
+            setOpenProfle(true);
+          }}
         />
       ) : (
-        <button className="btn ml-auto" onClick={() => setOpen(true)}>
+        <button
+          className="btn ml-auto"
+          onClick={() => {
+            dispatch({
+              type: "SET_NAV",
+              payload: false,
+            });
+            setOpen(true);
+          }}
+        >
           Login
         </button>
       )}

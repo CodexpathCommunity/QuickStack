@@ -6,14 +6,6 @@ function Avatar({ url, className, setOpenProfle, modal, heading }) {
 
   return (
     <img
-      onClick={() => {
-        heading &&
-          dispatch({
-            type: "SET_NAV",
-            payload: false,
-          });
-        setOpenProfle(true);
-      }}
       src={url}
       loading="lazy"
       className={`${
