@@ -52,7 +52,7 @@ function Header() {
       <Link href="/">
         <Image
           src="/images/lightlogo.png"
-          className="mr-2"
+          className="mr-2 link"
           height={30}
           width={200}
           onClick={() =>
@@ -83,11 +83,8 @@ function Header() {
 
       {user ? (
         <>
-          <Link href="/upload" className="link">
-            <CloudUploadIcon
-              className="h-10 mr-4 ml-4 hidden sm:inline-block"
-              className="link"
-            />
+          <Link href="/upload">
+            <CloudUploadIcon className="h-10 mr-4 ml-4 hidden sm:inline-block link" />
           </Link>
           <Avatar
             url="https://avatars.githubusercontent.com/u/69096827?v=4"
