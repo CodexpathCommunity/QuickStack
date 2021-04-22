@@ -7,7 +7,14 @@ function Upload() {
   const [desc, setDesc] = useState("");
   const [sucess, setSucess] = useState(false);
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-evenly h-screen flex-col">
+      <h2
+        className={`text-xl text-green-200  ${
+          sucess ? "inline-block" : "hidden"
+        }`}
+      >
+        Sucessfully uploaded a content!!!
+      </h2>
       <div
         className="
       flex flex-col items-center border-2 
@@ -40,7 +47,7 @@ function Upload() {
             className="p-2 border-2 w-full rounded-md border-[#03056b] focus:outline-none "
           />
           <h2 className="text-xl font-bold">Description :</h2>
-          <textarea className="p-2 border-2 w-full rounded-md border-[#03056b] focus:outline-none resize-none h-14" />
+          <textarea className="p-2 border-2 w-full rounded-md border-[#03056b] focus:outline-none resize-none h-36" />
         </form>
       </div>
     </div>
