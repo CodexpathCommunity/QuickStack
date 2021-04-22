@@ -42,7 +42,12 @@ function LoginModal({ setOpen }) {
 
   return (
     <div style={modalStyle} className={classes.paper}>
-      <h2 className="mb-4 text-xl font-md">Login to continue</h2>
+      <h2 className="mb-4 text-xl font-md">Login to Flexgela</h2>
+      <img
+        src="/images/logos.png"
+        alt="flexgela logo"
+        className="h-16 w-16 m-6 object-contain"
+      />
       <button className="btn" onClick={signIn}>
         Continue With Google{" "}
       </button>
