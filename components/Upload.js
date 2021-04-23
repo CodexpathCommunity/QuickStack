@@ -1,13 +1,17 @@
 import { useState } from "react";
-import { db, storage } from "../firebase";
+import { db, storage, auth } from "../firebase";
 import firebase from "firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Circle } from "better-react-spinkit";
 
 function Upload() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [image, setImage] = useState(null);
   const [video, setVideo] = useState(null);
-  const [sucess, setSucess] = useState(false);
+  const [imgUrl, setImgUrl] = useState(null);
+  const [upLoading, setUploading] = useState(false);
+  const [user] = useAuthState(auth);
 
   const imgChange = (e) => {
     if (e.target.files[0]) {
@@ -22,6 +26,7 @@ function Upload() {
 
   const handleUpload = (e) => {
     e.preventDefault();
+    setUploading(true);
     storage
       .ref(`content/${title}/image/${image.name}`)
       .put(image)
@@ -31,7 +36,7 @@ function Upload() {
           .child(`${title}/image/${image.name}`)
           .getDownloadURL()
           .then((url) => {
-            console.log(url);
+            setImgUrl(url);
           });
       });
     storage
@@ -44,6 +49,21 @@ function Upload() {
           .getDownloadURL()
           .then((url) => {
             console.log(url);
+            db.collection("content").doc(user.uid).collection("upload").add({
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              title: title,
+              video: url,
+              image: imgUrl,
+              size: snapshot._delegate.bytesTransferred,
+            });
+
+            setUploading(false);
+            setTitle("");
+            setDesc("");
+            setTitle("");
+            setImage(null);
+            setVideo(null);
+            setImgUrl(null);
           });
       });
     alert("Files has been uploaded");
@@ -51,13 +71,7 @@ function Upload() {
 
   return (
     <div className="flex items-center justify-evenly h-screen flex-col">
-      <h2
-        className={`text-xl text-green-200  ${
-          sucess ? "inline-block" : "hidden"
-        }`}
-      >
-        Sucessfully uploaded a content!!!
-      </h2>
+      {upLoading && <Circle color=" #4c7785;" size={60} />}
       <div
         className="
       flex flex-col items-center border-2 
@@ -104,7 +118,7 @@ function Upload() {
             focus:outline-none resize-none h-36"
           />
           <button
-            onClick={onUploadSubmission}
+            onClick={handleUpload}
             className="btn w-3/4 m-auto mt-4 text-2xl"
           >
             Upload
