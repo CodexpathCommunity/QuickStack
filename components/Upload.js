@@ -61,7 +61,6 @@ function Upload() {
                     setUploading(false);
                     setTitle("");
                     setDesc("");
-                    setTitle("");
                     setImage(null);
                     setVideo(null);
                     setImgUrl(null);
@@ -74,7 +73,6 @@ function Upload() {
 
   return (
     <div className="flex items-center justify-evenly h-screen flex-col">
-      {upLoading && <Circle color=" #4c7785;" size={60} />}
       <div
         className="
       flex flex-col items-center border-2 
@@ -128,6 +126,8 @@ function Upload() {
           </button>
         </form>
       </div>
+
+      {upLoading && <Circle color=" #4c7785;" size={60} />}
     </div>
   );
 }
