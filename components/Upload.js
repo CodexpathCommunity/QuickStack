@@ -5,60 +5,48 @@ import firebase from "firebase";
 function Upload() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [image, setImage] = useState(null);
+  const [video, setVideo] = useState(null);
   const [sucess, setSucess] = useState(false);
-  const [files, setFiles] = useState([]);
 
-  const onFileChange = (e) => {
-    for (let i = 0; i < e.target.files.length; i++) {
-      const newFile = e.target.files[i];
-      newFile["id"] = Math.random();
-      // add an "id" property to each File object
-      setFiles((prevState) => [...prevState, newFile]);
+  const imgChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+  const vidChange = (e) => {
+    if (e.target.files[0]) {
+      setVideo(e.target.files[0]);
     }
   };
 
-  // the upload task
-
-  const onUploadSubmission = (e) => {
-    e.preventDefault(); //preventing refreshing
-    const promises = [];
-    files.forEach((file) => {
-      const uploadTask = firebase
-        .storage()
-        .ref()
-        .child(`course/file/${title}/${file.name}`)
-        .put(file);
-      promises.push(uploadTask);
-      uploadTask.on(
-        firebase.storage.TaskEvent.STATE_CHANGED,
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          if (snapshot.state === firebase.storage.TaskState.RUNNING) {
-            console.log(`progress: ${progress}%`);
-          }
-        },
-        (error) => console.log(error.code),
-        async () => {
-          const downloadURL = await uploadTask.snapshot.ref
-            .getDownloadURL()
-            .then((url) => {
-              console.log(url);
-
-              // db.collection("CONTENTS").ADD({
-              //   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-              //     title: title,
-              //     description: desc,
-              //     videoUrl: url,
-              //     imageUrl: url,
-              // });
-            });
-        }
-      );
-    });
-    Promise.all(promises)
-      .then(() => alert("All files uploaded"))
-      .catch((err) => console.log(err.code));
+  const handleUpload = (e) => {
+    e.preventDefault();
+    storage
+      .ref(`content/${title}/image/${image.name}`)
+      .put(image)
+      .then((snapshot) => {
+        storage
+          .ref("content")
+          .child(`${title}/image/${image.name}`)
+          .getDownloadURL()
+          .then((url) => {
+            console.log(url);
+          });
+      });
+    storage
+      .ref(`content/${title}/video/${video.name}`)
+      .put(image)
+      .then((snapshot) => {
+        storage
+          .ref("content")
+          .child(`${title}/video/${video.name}`)
+          .getDownloadURL()
+          .then((url) => {
+            console.log(url);
+          });
+      });
+    alert("Files has been uploaded");
   };
 
   return (
@@ -96,14 +84,14 @@ function Upload() {
             type="file"
             name="myImage"
             accept="image/x-png,image/gif,image/jpeg"
-            onChange={onFileChange}
+            onChange={imgChange}
             className="p-2 border-2 w-full rounded-md border-[#03056b] focus:outline-none "
           />
           <h2 className="text-xl font-bold">Video :</h2>
           <input
             type="file"
             accept="video/mp4,video/x-m4v,video/*"
-            onChange={onFileChange}
+            onChange={vidChange}
             className="p-2 border-2 w-full rounded-md border-[#03056b] focus:outline-none "
           />
           <h2 className="text-xl font-bold">Description :</h2>
