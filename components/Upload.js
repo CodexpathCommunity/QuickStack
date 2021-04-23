@@ -26,7 +26,7 @@ function Upload() {
       const uploadTask = firebase
         .storage()
         .ref()
-        .child(`course/file/path/${file.name}`)
+        .child(`course/file/${title}/${file.name}`)
         .put(file);
       promises.push(uploadTask);
       uploadTask.on(
@@ -44,15 +44,15 @@ function Upload() {
             .getDownloadURL()
             .then((url) => {
               console.log(url);
-            });
-          //    then((url) => {
-          // db.collection("All_COURSES").add({
-          //   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-          //   title: title,
 
-          //   description: desc,
-          // });
-          // DO  something with the url
+              // db.collection("CONTENTS").ADD({
+              //   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              //     title: title,
+              //     description: desc,
+              //     videoUrl: url,
+              //     imageUrl: url,
+              // });
+            });
         }
       );
     });
