@@ -3,49 +3,90 @@ import { db, storage } from "../firebase";
 import firebase from "firebase";
 
 function Upload() {
-  const [thumbnail, setThumbnail] = useState(null);
-  const [video, setVideo] = useState(null);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [sucess, setSucess] = useState(false);
+  const [files, setFiles] = useState([]);
 
-  const handleImgChange = (e) => {
-    if (e.target.files[0]) {
-      setThumbnail(e.target.files[0]);
+  const onFileChange = (e) => {
+    for (let i = 0; i < e.target.files.length; i++) {
+      const newFile = e.target.files[i];
+      newFile["id"] = Math.random();
+      // add an "id" property to each File object
+      setFiles((prevState) => [...prevState, newFile]);
     }
   };
-  const handleVidChange = (e) => {
-    if (e.target.files[0]) {
-      setVideo(e.target.files[0]);
-    }
+
+  // the upload task
+
+  const onUploadSubmission = (e) => {
+    e.preventDefault(); //preventing refreshing
+    const promise = [];
+    files.forEach((file) => {
+      const uploadTask = firebase
+        .storage()
+        .ref()
+        .child(`course/file/path/${file.name}`)
+        .put(file);
+      promises.push(uploadTask);
+      uploadTask.on(
+        firebase.storage.TaskEvent.STATE_CHANGED,
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          if (snapshot.state === firebase.storage.TaskState.RUNNING) {
+            console.log(`progress: ${progress}%`);
+          }
+        },
+        (error) => console.log(error.code),
+        async () => {
+          const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+          // DO  something with the url
+        }
+      );
+    });
+    Promise.all(promises)
+      .then(() => alert("All files uploaded"))
+      .catch((err) => console.log(err.code));
   };
 
-  const handleUpload = () => {
-    storage
-      .ref(`courses/${title}`)
-      .put(thumbnail)
-      .put(video)
-      .then((snapshot) => {
-        storage
-          .ref("courses")
-          .child(title)
-          .getDownloadURL()
-          .then((url) => {
-            db.collection("All_COURSES").add({
-              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-              title: title,
-              thumbnail: thumbnail,
-              video: video,
-              imageUrl: url,
-              description: desc,
-            });
-            setSucess(true);
-            setThumbnail(null);
-            setTitle("");
-            setDesc("");
-          });
-      });
-  };
+  // const handleImgChange = (e) => {
+  //   if (e.target.files[0]) {
+  //     setThumbnail(e.target.files[0]);
+  //   }
+  // };
+  // const handleVidChange = (e) => {
+  //   if (e.target.files[0]) {
+  //     setVideo(e.target.files[0]);
+  //   }
+  // };
+
+  // const handleUpload = () => {
+  //   storage
+  //     .ref(`courses/${title}`)
+  //     .put(thumbnail)
+  //     .put(video)
+  //     .then((snapshot) => {
+  //       storage
+  //         .ref("courses")
+  //         .child(title)
+  //         .getDownloadURL()
+  //         .then((url) => {
+  //           db.collection("All_COURSES").add({
+  //             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+  //             title: title,
+  //             thumbnail: thumbnail,
+  //             video: video,
+  //             imageUrl: url,
+  //             description: desc,
+  //           });
+  //           setSucess(true);
+  //           setThumbnail(null);
+  //           setTitle("");
+  //           setDesc("");
+  //         });
+  //     });
+  // };
 
   return (
     <div className="flex items-center justify-evenly h-screen flex-col">
@@ -82,14 +123,14 @@ function Upload() {
             type="file"
             name="myImage"
             accept="image/x-png,image/gif,image/jpeg"
-            onChange={handleImgChange}
+            onChange={onFileChange}
             className="p-2 border-2 w-full rounded-md border-[#03056b] focus:outline-none "
           />
           <h2 className="text-xl font-bold">Video :</h2>
           <input
             type="file"
             accept="video/mp4,video/x-m4v,video/*"
-            onChange={handleVidChange}
+            onChange={onFileChange}
             className="p-2 border-2 w-full rounded-md border-[#03056b] focus:outline-none "
           />
           <h2 className="text-xl font-bold">Description :</h2>
@@ -101,7 +142,10 @@ function Upload() {
             rounded-md border-[#03056b] 
             focus:outline-none resize-none h-36"
           />
-          <button onClick={handleUpload} className="btn w-3/4 m-auto text-2xl">
+          <button
+            onClick={onUploadSubmission}
+            className="btn w-3/4 m-auto mt-4 text-2xl"
+          >
             Upload
           </button>
         </form>
