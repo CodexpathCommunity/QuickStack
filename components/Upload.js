@@ -21,7 +21,7 @@ function Upload() {
 
   const onUploadSubmission = (e) => {
     e.preventDefault(); //preventing refreshing
-    const promise = [];
+    const promises = [];
     files.forEach((file) => {
       const uploadTask = firebase
         .storage()
@@ -40,7 +40,18 @@ function Upload() {
         },
         (error) => console.log(error.code),
         async () => {
-          const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+          const downloadURL = await uploadTask.snapshot.ref
+            .getDownloadURL()
+            .then((url) => {
+              console.log(url);
+            });
+          //    then((url) => {
+          // db.collection("All_COURSES").add({
+          //   timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          //   title: title,
+
+          //   description: desc,
+          // });
           // DO  something with the url
         }
       );
@@ -49,44 +60,6 @@ function Upload() {
       .then(() => alert("All files uploaded"))
       .catch((err) => console.log(err.code));
   };
-
-  // const handleImgChange = (e) => {
-  //   if (e.target.files[0]) {
-  //     setThumbnail(e.target.files[0]);
-  //   }
-  // };
-  // const handleVidChange = (e) => {
-  //   if (e.target.files[0]) {
-  //     setVideo(e.target.files[0]);
-  //   }
-  // };
-
-  // const handleUpload = () => {
-  //   storage
-  //     .ref(`courses/${title}`)
-  //     .put(thumbnail)
-  //     .put(video)
-  //     .then((snapshot) => {
-  //       storage
-  //         .ref("courses")
-  //         .child(title)
-  //         .getDownloadURL()
-  //         .then((url) => {
-  //           db.collection("All_COURSES").add({
-  //             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-  //             title: title,
-  //             thumbnail: thumbnail,
-  //             video: video,
-  //             imageUrl: url,
-  //             description: desc,
-  //           });
-  //           setSucess(true);
-  //           setThumbnail(null);
-  //           setTitle("");
-  //           setDesc("");
-  //         });
-  //     });
-  // };
 
   return (
     <div className="flex items-center justify-evenly h-screen flex-col">
