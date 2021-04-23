@@ -7,9 +7,8 @@ import { Circle } from "better-react-spinkit";
 function Upload() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState("null");
   const [video, setVideo] = useState(null);
-  const [imgUrl, setImgUrl] = useState(null);
   const [upLoading, setUploading] = useState(false);
   const [user] = useAuthState(auth);
 
@@ -36,37 +35,41 @@ function Upload() {
           .child(`${title}/image/${image.name}`)
           .getDownloadURL()
           .then((url) => {
-            setImgUrl(url);
-          });
-      });
-    storage
-      .ref(`content/${title}/video/${video.name}`)
-      .put(image)
-      .then((snapshot) => {
-        storage
-          .ref("content")
-          .child(`${title}/video/${video.name}`)
-          .getDownloadURL()
-          .then((url) => {
-            console.log(url);
-            db.collection("content").doc(user.uid).collection("upload").add({
-              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-              title: title,
-              video: url,
-              image: imgUrl,
-              size: snapshot._delegate.bytesTransferred,
-            });
+            const imgUrl = url;
+            storage
+              .ref(`content/${title}/video/${video.name}`)
+              .put(image)
+              .then((snapshot) => {
+                storage
+                  .ref("content")
+                  .child(`${title}/video/${video.name}`)
+                  .getDownloadURL()
+                  .then((url) => {
+                    console.log(url);
+                    db.collection("content")
+                      .doc(user.uid)
+                      .collection("upload")
+                      .add({
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                        title: title,
+                        desc: desc,
+                        video: url,
+                        image: imgUrl,
+                        size: snapshot._delegate.bytesTransferred,
+                      });
 
-            setUploading(false);
-            setTitle("");
-            setDesc("");
-            setTitle("");
-            setImage(null);
-            setVideo(null);
-            setImgUrl(null);
+                    setUploading(false);
+                    setTitle("");
+                    setDesc("");
+                    setTitle("");
+                    setImage(null);
+                    setVideo(null);
+                    setImgUrl(null);
+                    alert("Files has been uploaded");
+                  });
+              });
           });
       });
-    alert("Files has been uploaded");
   };
 
   return (
