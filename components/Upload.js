@@ -9,7 +9,7 @@ function Upload() {
   const [desc, setDesc] = useState("");
   const [image, setImage] = useState("null");
   const [video, setVideo] = useState(null);
-  const [upLoading, setUploading] = useState(false);
+  const [upLoading, setUploading] = useState(true);
   const [user] = useAuthState(auth);
 
   const imgChange = (e) => {
@@ -55,6 +55,7 @@ function Upload() {
                         desc: desc,
                         video: url,
                         image: imgUrl,
+                        uploadURL: user.photoURL,
                         size: snapshot._delegate.bytesTransferred,
                       });
 
@@ -63,7 +64,6 @@ function Upload() {
                     setDesc("");
                     setImage(null);
                     setVideo(null);
-                    setImgUrl(null);
                     alert("Files has been uploaded");
                   });
               });
@@ -89,7 +89,7 @@ function Upload() {
           <h2 className="text-xl font-bold">Title :</h2>
           <input
             type="text"
-            placeholder="Name of Content"
+            placeholder="Title of content - make it brief, include keywords .... "
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="p-2 border-2 w-full rounded-md border-[#03056b] focus:outline-none "
@@ -118,16 +118,11 @@ function Upload() {
             rounded-md border-[#03056b] 
             focus:outline-none resize-none h-36"
           />
-          <button
-            onClick={handleUpload}
-            className="btn w-3/4 m-auto mt-4 text-2xl"
-          >
+          <button onClick={handleUpload} className="btn w-3/4 m-auto  text-2xl">
             Upload
           </button>
         </form>
       </div>
-
-      {upLoading && <Circle color=" #4c7785;" size={60} />}
     </div>
   );
 }

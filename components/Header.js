@@ -87,7 +87,7 @@ function Header() {
             <CloudUploadIcon className="h-10 mr-4 ml-4 hidden sm:inline-block link" />
           </Link>
           <Avatar
-            url="https://avatars.githubusercontent.com/u/69096827?v=4"
+            url={user?.photoURL}
             className="ml-auto"
             setOpenProfle={setOpenProfle}
             onClick={() => {
