@@ -90,13 +90,7 @@ function Header() {
             url={user?.photoURL}
             className="ml-auto"
             setOpenProfle={setOpenProfle}
-            onClick={() => {
-              dispatch({
-                type: "SET_NAV",
-                payload: false,
-              });
-              setOpenProfle(true);
-            }}
+            heading
           />
         </>
       ) : (
