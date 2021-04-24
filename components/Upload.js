@@ -56,6 +56,9 @@ function Upload() {
                         video: url,
                         image: imgUrl,
                         uploadURL: user.photoURL,
+                        viewtime: 0,
+                        comment: 0,
+                        upvote: 0,
                         size: snapshot._delegate.bytesTransferred,
                       });
 
