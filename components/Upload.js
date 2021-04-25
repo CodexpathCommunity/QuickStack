@@ -2,7 +2,6 @@ import { useState } from "react";
 import { db, storage, auth } from "../firebase";
 import firebase from "firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Circle } from "better-react-spinkit";
 
 function Upload() {
   const [title, setTitle] = useState("");
@@ -23,6 +22,7 @@ function Upload() {
     }
   };
 
+  
   const handleUpload = (e) => {
     e.preventDefault();
     setUploading(true);
@@ -45,7 +45,6 @@ function Upload() {
                   .child(`${title}/video/${video.name}`)
                   .getDownloadURL()
                   .then((url) => {
-                    console.log(url);
                     db.collection("content")
                       .doc(user.uid)
                       .collection("upload")

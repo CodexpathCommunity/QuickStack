@@ -4,8 +4,11 @@ import SideNav from "../components/SideNav";
 import Hero from "../components/Hero";
 import NavLink from "../components/NavLink/Index";
 import Card from "../components/Card";
+import { db } from "../firebase";
 
-export default function Home() {
+export default function Home({ feeds }) {
+  console.log(feeds);
+
   return (
     <div className="relative">
       <Head>

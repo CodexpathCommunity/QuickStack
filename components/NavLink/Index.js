@@ -41,7 +41,7 @@ function NavLink() {
         upvoted: false,
       });
     }
-    if (name === "order") {
+    if (name === "topics") {
       setLineState({
         search: false,
         popular: false,
@@ -78,8 +78,8 @@ function NavLink() {
       value: "recent",
     },
     {
-      name: "Laddar",
-      state: lineState.ordered,
+      name: "Topics",
+      state: lineState.topics,
       value: "Categories",
     },
     {
