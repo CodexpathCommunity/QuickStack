@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import firebase from "firebase";
 import { auth, db } from "../firebase";
 import { Provider } from "../context";
+import Header from "../components/Header";
+import SideNav from "../components/SideNav";
 
 function MyApp({ Component, pageProps }) {
   const [user] = useAuthState(auth);
@@ -23,6 +25,8 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Provider>
+      <Header />
+      <SideNav />
       <Component {...pageProps} />
     </Provider>
   );

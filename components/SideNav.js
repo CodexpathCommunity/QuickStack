@@ -1,15 +1,34 @@
 import { useContext } from "react";
 import { Context } from "../context";
+import Link from "next/link";
 
 function SideNav() {
   const { state, dispatch } = useContext(Context);
   const links = [
-    "courses",
-    "Road-Map",
-    "Resourses",
-    "Design Trends",
-    "Jobs",
-    "Pricing",
+    {
+      name: "Videos",
+      href: "videos",
+    },
+    {
+      name: "Blog",
+      href: "blog",
+    },
+    {
+      name: "Topics",
+      href: "Topics",
+    },
+    {
+      name: "Resourses",
+      href: "resourses",
+    },
+    {
+      name: "Design Trends",
+      href: "designtrends",
+    },
+    {
+      name: "Jobs",
+      href: "jobs",
+    },
   ];
 
   return (
@@ -21,19 +40,20 @@ function SideNav() {
             text-white
             `}
     >
-      {links.map((link) => (
-        <h3
-          key={link}
-          className="p-2 border-b-2 border-transparent hover:border-[#03056b] cursor-pointer"
-          onClick={() =>
-            dispatch({
-              type: "SET_NAV",
-              payload: false,
-            })
-          }
-        >
-          {link}
-        </h3>
+      {links.map(({ name, href }) => (
+        <Link href={`/${href}`} key={href}>
+          <h3
+            className="p-2 border-b-2 border-transparent hover:border-[#03056b] cursor-pointer"
+            onClick={() =>
+              dispatch({
+                type: "SET_NAV",
+                payload: false,
+              })
+            }
+          >
+            {name}
+          </h3>
+        </Link>
       ))}
     </div>
   );
