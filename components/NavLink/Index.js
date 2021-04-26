@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Link from "./Link";
+import Select from "./Select";
 import SearchBar from "./SearchBar";
 
 function NavLink() {
@@ -98,7 +98,7 @@ function NavLink() {
     >
       <div className="flex items-center space-x-2 ">
         {linkData.map(({ state, name, value }) => (
-          <Link
+          <Select
             key={name}
             active={state}
             name={name}

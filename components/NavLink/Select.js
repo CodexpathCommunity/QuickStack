@@ -1,4 +1,4 @@
-function Link({ active, name, value, onClick }) {
+function Select({ active, name, value, onClick }) {
   return (
     <div
       className={`
@@ -14,4 +14,4 @@ function Link({ active, name, value, onClick }) {
   );
 }
 
-export default Link;
+export default Select;
