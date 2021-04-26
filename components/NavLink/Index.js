@@ -41,7 +41,7 @@ function NavLink() {
         upvoted: false,
       });
     }
-    if (name === "topics") {
+    if (name === "topic") {
       setLineState({
         search: false,
         popular: false,
@@ -79,8 +79,8 @@ function NavLink() {
     },
     {
       name: "Topics",
-      state: lineState.topics,
-      value: "Categories",
+      state: lineState.ordered,
+      value: "topic",
     },
     {
       name: "Upvoted",
